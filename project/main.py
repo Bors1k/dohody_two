@@ -2,6 +2,7 @@ from PyQt5 import QtWidgets
 from MainForm import Ui_MainWindow
 from PyQt5.QtWidgets import QFileDialog, QLabel, QTableWidgetItem, QHeaderView, QMessageBox
 import sys, os
+from read_excel import Read
 
 
 class MyWindow(QtWidgets.QMainWindow):
@@ -12,6 +13,11 @@ class MyWindow(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
         self.ui.loadVipiski.clicked.connect(self.open_file)
         self.ui.loadPrilozhenya.clicked.connect(self.open_file)
+        self.check_one = False
+        self.check_two = False
+        self.filename = ''
+        self.filename_one = ''
+        self.filename_two = ''
         
     def open_file(self):
         self.filename = QFileDialog.getOpenFileName(
@@ -32,7 +38,11 @@ class MyWindow(QtWidgets.QMainWindow):
                 self.check_one = False
                 self.check_two = True
 
-                
+    
+    def new_thread(self):
+        self.my_thread = Read(my_window=self)
+        self.my_thread.start()
+
 
 app = QtWidgets.QApplication([])
 application = MyWindow()

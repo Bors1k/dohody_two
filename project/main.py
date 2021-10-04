@@ -32,11 +32,13 @@ class MyWindow(QtWidgets.QMainWindow):
                 self.filename_one = self.filename
                 self.check_one = True
                 self.check_two = False
+                self.new_thread()
                 
             else:
                 self.filename_two = self.filename
                 self.check_one = False
                 self.check_two = True
+                self.new_thread()
 
     
     def new_thread(self):

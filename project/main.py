@@ -28,7 +28,7 @@ class MyWindow(QtWidgets.QMainWindow):
         if str(self.filename) in "('', '')":
             self.ui.statusbar.showMessage('Файл не выбран')
         else:
-            if sender.text() == 'Загрузить Выписки':
+            if sender.text() == 'ЗАГРУЗИТЬ ВЫПИСКИ':
                 self.filename_one = self.filename
                 self.check_one = True
                 self.check_two = False

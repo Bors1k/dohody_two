@@ -3,6 +3,7 @@ from PyQt5.QtCore import QThread, pyqtSignal
 from openpyxl import Workbook
 import re
 from pojo import LS
+import re
 
 class Read(QThread):
     def __init__(self, my_window, parent=None):
@@ -11,7 +12,7 @@ class Read(QThread):
         self.filename = ''
         self.dict_lic_scheta = {}
         self.dict_summ = {}
-
+    
     def run(self):
         if self.my_window.check_one:
             self.filename = self.my_window.filename_one[0]
@@ -24,11 +25,11 @@ class Read(QThread):
         i = 0
         for cell in this_sheet['AH']:
             i = i + 1
-            if cell.value != None and cell.value != '█' and len(str(cell.value)) == 12:
+            if cell.value != None and cell.value != '█' and len(str(cell.value)) == 12 and str(cell.value).__contains__(",") != True and re.match(r"а-я",str(cell.value).lower()) == None:
                 # print(str(cell.value) + ' ' + str(i))
                 self.dict_lic_scheta[str(cell.value)] = i
 
-                
+        print(len(self.dict_lic_scheta))        
         
         i = 0 
         for cell in this_sheet['AC']:
@@ -36,3 +37,5 @@ class Read(QThread):
             if 'Итого' in str(cell.value):
                 # print(str(this_sheet['AG' + str(i)].value) + ' ' + str(i))
                 self.dict_summ[str(this_sheet['AG' + str(i)].value)] = i
+
+        print(len(self.dict_summ))

@@ -14,37 +14,98 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(638, 390)
+        MainWindow.resize(800, 600)
+        MainWindow.setStyleSheet("background-color: rgba(85, 85, 127, 100);")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setStyleSheet("background-color: rgba(85, 85, 127, 50);")
         self.centralwidget.setObjectName("centralwidget")
-        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.centralwidget)
-        self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.verticalLayout = QtWidgets.QVBoxLayout()
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout.setSpacing(0)
         self.verticalLayout.setObjectName("verticalLayout")
+        self.widget = QtWidgets.QWidget(self.centralwidget)
+        self.widget.setStyleSheet("QWidget#widget{\n"
+"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 170, 255, 246), stop:1 rgba(85, 170, 127, 255));}")
+        self.widget.setObjectName("widget")
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.widget)
+        self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.loadVipiski = QtWidgets.QPushButton(self.centralwidget)
+        self.loadVipiski = QtWidgets.QPushButton(self.widget)
+        self.loadVipiski.setMinimumSize(QtCore.QSize(0, 30))
+        self.loadVipiski.setStyleSheet("QPushButton{\n"
+"background-color: rgba(85, 85, 127, 100);\n"
+"font: 75 12pt \"Times New Roman\";\n"
+"color: rgb(170, 255, 127);\n"
+"border-radius: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"background-color: rgba(85, 85, 127, 150);\n"
+"font: 75 12pt \"Times New Roman\";\n"
+"color: rgb(0, 255, 255);\n"
+"border-radius: 5px;\n"
+"}")
         self.loadVipiski.setObjectName("loadVipiski")
         self.horizontalLayout.addWidget(self.loadVipiski)
-        self.loadPrilozhenya = QtWidgets.QPushButton(self.centralwidget)
+        self.loadPrilozhenya = QtWidgets.QPushButton(self.widget)
+        self.loadPrilozhenya.setMinimumSize(QtCore.QSize(0, 30))
+        self.loadPrilozhenya.setStyleSheet("QPushButton{\n"
+"background-color: rgba(85, 85, 127, 100);\n"
+"font: 75 12pt \"Times New Roman\";\n"
+"color: rgb(170, 255, 127);\n"
+"border-radius: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"background-color: rgba(85, 85, 127, 150);\n"
+"font: 75 12pt \"Times New Roman\";\n"
+"color: rgb(0, 255, 255);\n"
+"border-radius: 5px;\n"
+"}")
         self.loadPrilozhenya.setObjectName("loadPrilozhenya")
         self.horizontalLayout.addWidget(self.loadPrilozhenya)
-        self.sverka = QtWidgets.QPushButton(self.centralwidget)
+        self.sverka = QtWidgets.QPushButton(self.widget)
+        self.sverka.setMinimumSize(QtCore.QSize(0, 30))
+        self.sverka.setStyleSheet("QPushButton{\n"
+"background-color: rgba(85, 85, 127, 100);\n"
+"font: 75 12pt \"Times New Roman\";\n"
+"color: rgb(170, 255, 127);\n"
+"border-radius: 5px;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"background-color: rgba(85, 85, 127, 150);\n"
+"font: 75 12pt \"Times New Roman\";\n"
+"color: rgb(0, 255, 255);\n"
+"border-radius: 5px;\n"
+"}")
         self.sverka.setObjectName("sverka")
         self.horizontalLayout.addWidget(self.sverka)
-        self.verticalLayout.addLayout(self.horizontalLayout)
-        self.textEdit = QtWidgets.QTextEdit(self.centralwidget)
-        self.textEdit.setObjectName("textEdit")
-        self.verticalLayout.addWidget(self.textEdit)
-        self.verticalLayout_2.addLayout(self.verticalLayout)
+        self.verticalLayout_2.addLayout(self.horizontalLayout)
+        self.logger = QtWidgets.QTextEdit(self.widget)
+        self.logger.setStyleSheet("background-color: rgba(85, 85, 127, 100);\n"
+"font: 75 12pt \"Times New Roman\";\n"
+"color: rgb(170, 255, 255);\n"
+"border-radius: 10px;")
+        self.logger.setObjectName("logger")
+        self.verticalLayout_2.addWidget(self.logger)
+        self.verticalLayout.addWidget(self.widget)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 638, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
+        self.menubar.setStyleSheet("color: rgb(255, 255, 255);")
         self.menubar.setObjectName("menubar")
+        self.menu = QtWidgets.QMenu(self.menubar)
+        self.menu.setObjectName("menu")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
+        self.menu_2 = QtWidgets.QAction(MainWindow)
+        self.menu_2.setObjectName("menu_2")
+        self.menu.addAction(self.menu_2)
+        self.menubar.addAction(self.menu.menuAction())
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -52,6 +113,8 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.loadVipiski.setText(_translate("MainWindow", "Загрузить Выписки"))
-        self.loadPrilozhenya.setText(_translate("MainWindow", "Загрузить Приложения"))
-        self.sverka.setText(_translate("MainWindow", "Приступить к сверке"))
+        self.loadVipiski.setText(_translate("MainWindow", "ЗАГРУЗИТЬ ВЫПИСКИ"))
+        self.loadPrilozhenya.setText(_translate("MainWindow", "ЗАГРУЗИТЬ ПРИЛОЖЕНИЯ"))
+        self.sverka.setText(_translate("MainWindow", "ПРИСТУПИТЬ К СВЕРКЕ"))
+        self.menu.setTitle(_translate("MainWindow", "О программе"))
+        self.menu_2.setText(_translate("MainWindow", "О программе"))

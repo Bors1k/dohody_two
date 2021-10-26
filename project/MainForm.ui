@@ -6,46 +6,143 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>638</width>
-    <height>390</height>
+    <width>800</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgba(85, 85, 127, 100);</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout_2">
+   <property name="styleSheet">
+    <string notr="true">background-color: rgba(85, 85, 127, 50);</string>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
     <item>
-     <layout class="QVBoxLayout" name="verticalLayout">
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout">
-        <item>
-         <widget class="QPushButton" name="loadVipiski">
-          <property name="text">
-           <string>Загрузить Выписки</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="loadPrilozhenya">
-          <property name="text">
-           <string>Загрузить Приложения</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="sverka">
-          <property name="text">
-           <string>Приступить к сверке</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <widget class="QTextEdit" name="textEdit"/>
-      </item>
-     </layout>
+     <widget class="QWidget" name="widget" native="true">
+      <property name="styleSheet">
+       <string notr="true">QWidget#widget{
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 170, 255, 246), stop:1 rgba(85, 170, 127, 255));}</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QPushButton" name="loadVipiski">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton{
+background-color: rgba(85, 85, 127, 100);
+font: 75 12pt &quot;Times New Roman&quot;;
+color: rgb(170, 255, 127);
+border-radius: 5px;
+}
+
+QPushButton:hover{
+background-color: rgba(85, 85, 127, 150);
+font: 75 12pt &quot;Times New Roman&quot;;
+color: rgb(0, 255, 255);
+border-radius: 5px;
+}</string>
+           </property>
+           <property name="text">
+            <string>ЗАГРУЗИТЬ ВЫПИСКИ</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="loadPrilozhenya">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton{
+background-color: rgba(85, 85, 127, 100);
+font: 75 12pt &quot;Times New Roman&quot;;
+color: rgb(170, 255, 127);
+border-radius: 5px;
+}
+
+QPushButton:hover{
+background-color: rgba(85, 85, 127, 150);
+font: 75 12pt &quot;Times New Roman&quot;;
+color: rgb(0, 255, 255);
+border-radius: 5px;
+}</string>
+           </property>
+           <property name="text">
+            <string>ЗАГРУЗИТЬ ПРИЛОЖЕНИЯ</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="sverka">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton{
+background-color: rgba(85, 85, 127, 100);
+font: 75 12pt &quot;Times New Roman&quot;;
+color: rgb(170, 255, 127);
+border-radius: 5px;
+}
+
+QPushButton:hover{
+background-color: rgba(85, 85, 127, 150);
+font: 75 12pt &quot;Times New Roman&quot;;
+color: rgb(0, 255, 255);
+border-radius: 5px;
+}</string>
+           </property>
+           <property name="text">
+            <string>ПРИСТУПИТЬ К СВЕРКЕ</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QTextEdit" name="logger">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgba(85, 85, 127, 100);
+font: 75 12pt &quot;Times New Roman&quot;;
+color: rgb(170, 255, 255);
+border-radius: 10px;</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -54,12 +151,27 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>638</width>
+     <width>800</width>
      <height>21</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);</string>
+   </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>О программе</string>
+    </property>
+    <addaction name="menu_2"/>
+   </widget>
+   <addaction name="menu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="menu_2">
+   <property name="text">
+    <string>О программе</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

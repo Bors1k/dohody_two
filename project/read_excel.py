@@ -51,10 +51,10 @@ class Read(QThread):
         i = 1
 
         for k, v in self.dict_lic_scheta.items():
-            i = i + 1
             flag = True
             if(firstLs == None):
                 firstLs = LS(licevoy=k, rowNumber=v)
+                flag = False
             elif(firstLs != None and SecondLs == None and i != len(self.dict_lic_scheta)):
                 SecondLs = LS(licevoy=k, rowNumber=v)
 
@@ -63,22 +63,30 @@ class Read(QThread):
                         if(value > firstLs.rowNumber and value < SecondLs.rowNumber):
                             firstLs.SetSumma(key)
                             self.dict_LS.append(firstLs)
+                            firstLs = SecondLs
+                            SecondLs = None
                             flag = False
 
             else:
+                print(firstLs.licevoy)
+                print(firstLs.rowNumber)
                 for key, value in self.dict_summ.items():
                     if(flag):
+                        print(value)
                         if(value > firstLs.rowNumber):
                             firstLs.SetSumma(key)
                             self.dict_LS.append(firstLs)
+                            firstLs = SecondLs
+                            SecondLs = None
                             flag = False
 
-            # if(flag == True):
-            #     firstLs.SetSumma(0)
-            #     self.dict_LS.append(firstLs)
-
-            firstLs = SecondLs
-            SecondLs = None
+            if(flag == True):
+                firstLs.SetSumma(0)
+                self.dict_LS.append(firstLs)
+                firstLs = SecondLs
+                SecondLs = None
+            
+            i = i + 1
 
         print(len(self.dict_LS))
 

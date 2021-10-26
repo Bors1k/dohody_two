@@ -84,7 +84,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout.addWidget(self.sverka)
         self.verticalLayout_2.addLayout(self.horizontalLayout)
         self.logger = QtWidgets.QTextEdit(self.widget)
-        self.logger.setStyleSheet("background-color: rgba(85, 85, 127, 100);\n"
+        self.logger.setStyleSheet("background-color: rgba(85, 85, 127, 150);\n"
 "font: 75 12pt \"Times New Roman\";\n"
 "color: rgb(170, 255, 255);\n"
 "border-radius: 10px;")

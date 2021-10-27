@@ -46,7 +46,7 @@ class MyWindow(QtWidgets.QMainWindow):
     @QtCore.pyqtSlot(list)
     def appendText(self, list):
         for ls in list:
-            self.ui.logger.append(str(ls.licevoy) + "   " + str(ls.summa))
+            self.ui.logger.append(str(ls.licevoy) + "   " + str(ls.summa) + "   " + str(ls.vozvraty) + "   " + str(ls.zachety))
 
     def new_thread(self):
         self.my_thread = Read(my_window=self)

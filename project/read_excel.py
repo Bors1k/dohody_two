@@ -32,7 +32,7 @@ class Read(QThread):
             i = i + 1
             if cell.value != None and cell.value != '█' and len(str(cell.value)) == 12 and str(cell.value).__contains__(",") != True and re.match(r"[а-я]", str(cell.value).lower()) == None:
                 # print(str(cell.value) + ' ' + str(i))
-                self.dict_lic_scheta[str(cell.value)] = i
+                self.dict_lic_scheta[i] = str(cell.value)
 
         print(len(self.dict_lic_scheta))
 
@@ -41,70 +41,24 @@ class Read(QThread):
             i = i + 1
             if 'Итого' in str(cell.value):
                 # print(str(this_sheet['AG' + str(i)].value) + ' ' + str(i))
-                self.dict_summ[str(this_sheet['AG' + str(i)].value)] = i
-
+                self.dict_summ[i] = str(this_sheet['AG' + str(i)].value)
+        
         print(len(self.dict_summ))
 
         firstLs = None
         SecondLs = None
         i = 1
 
-        # for k, v in self.dict_lic_scheta.items():
-        #     print("i = ",i)
-        #     flag = True
-        #     if(firstLs == None):
-        #         firstLs = LS(licevoy=k, rowNumber=v)
-        #         flag = False
-        #     if(firstLs != None and SecondLs == None and i <= len(self.dict_lic_scheta)):
-        #         SecondLs = LS(licevoy=k, rowNumber=v)
-        #         print("1ls - ",firstLs.licevoy," ",firstLs.rowNumber)
-        #         print("2ls - ",SecondLs.licevoy," ",SecondLs.rowNumber)
-        #         if(i!=len(self.dict_lic_scheta)):
-        #             for key, value in self.dict_summ.items():
-        #                 if(flag):
-        #                     if(value > firstLs.rowNumber and value < SecondLs.rowNumber):
-        #                         firstLs.SetSumma(key)
-        #                         self.dict_LS.append(firstLs)
-        #                         firstLs = SecondLs
-        #                         SecondLs = None
-        #                         flag = False
-        #         else:
-        #             firstLs.SetSumma(0)
-        #             SecondLs.SetSumma(0)
-        #             for key, value in self.dict_summ.items():
-        #                 if(flag):
-        #                     if(value > firstLs.rowNumber and value < SecondLs.rowNumber):
-        #                         firstLs.SetSumma(key)
-
-        #                     if(value > SecondLs.rowNumber):
-        #                         SecondLs.SetSumma(key)
-                    
-        #             self.dict_LS.append(firstLs)
-        #             self.dict_LS.append(SecondLs)
-        #             flag = False 
-
-        #     if(flag == True):
-        #         firstLs.SetSumma(0)
-        #         self.dict_LS.append(firstLs)
-        #         firstLs = SecondLs
-        #         SecondLs = None
-            
-        #     i = i + 1
-
         for k, v in self.dict_lic_scheta.items():
-            print("i = ",i)
             if(firstLs == None):
-                firstLs = LS(licevoy=k, rowNumber=v)
+                firstLs = LS(licevoy=v, rowNumber=k)
             elif(firstLs != None and SecondLs == None and i <= len(self.dict_lic_scheta)):
-                SecondLs = LS(licevoy=k, rowNumber=v)
-                print("1ls - ",firstLs.licevoy," ",firstLs.rowNumber)
-                print("2ls - ",SecondLs.licevoy," ",SecondLs.rowNumber)
+                SecondLs = LS(licevoy=v, rowNumber=k)
                 if(i!=len(self.dict_lic_scheta)):
                     for key, value in self.dict_summ.items():
-                        if(value > firstLs.rowNumber and value < SecondLs.rowNumber):
-                            firstLs.SetSumma(key)
-                            # if(firstLs.licevoy.__contains__("04483D07700")):
-                            #     print(value)
+                        if(key > firstLs.rowNumber and key < SecondLs.rowNumber):
+                            firstLs.SetSumma(value)
+
                     
                     self.dict_LS.append(firstLs)
                     firstLs = SecondLs
@@ -112,11 +66,11 @@ class Read(QThread):
 
                 else:
                     for key, value in self.dict_summ.items():
-                            if(value > firstLs.rowNumber and value < SecondLs.rowNumber):
-                                firstLs.SetSumma(key)
+                            if(key > firstLs.rowNumber and key < SecondLs.rowNumber):
+                                firstLs.SetSumma(value)
 
-                            if(value > SecondLs.rowNumber):
-                                SecondLs.SetSumma(key)
+                            if(key > SecondLs.rowNumber):
+                                SecondLs.SetSumma(value)
                     
                     self.dict_LS.append(firstLs)
                     self.dict_LS.append(SecondLs)

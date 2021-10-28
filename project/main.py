@@ -289,7 +289,7 @@ class MyWindow(QtWidgets.QMainWindow):
             messagebox.show()
         else:
             messagebox = QMessageBox(
-                parent=self, text='ОБНАРУЖЕНЫ НЕ СОВПАДЕНИЯ!!!')
+                parent=self, text='ОБНАРУЖЕНЫ НЕСОВПАДЕНИЯ!!!')
             messagebox.setWindowTitle('Результат проверки')
             messagebox.setStyleSheet(
                 'QPushButton{color: rgb(255, 255, 255); font: 75 12pt "Times New Roman";} QLabel{color: rgb(255,255,255); font: 75 12pt "Times New Roman";}')

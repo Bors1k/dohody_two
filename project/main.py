@@ -161,7 +161,7 @@ class MyWindow(QtWidgets.QMainWindow):
                         newItem.setFont(font_t)                        
                         self.ui.tableWidget.setItem(schet, 7, newItem)
                                               
-                        if(str(vipiski.licevoy) == str(prilozhenia.licevoy) and str(vipiski.summa) and str(prilozhenia.summa) and str(vipiski.vozvraty) == str(prilozhenia.vozvraty) and str(vipiski.zachety == prilozhenia.zachety)):
+                        if(str(vipiski.licevoy) == str(prilozhenia.licevoy) and str(vipiski.summa) == str(prilozhenia.summa) and str(vipiski.vozvraty) == str(prilozhenia.vozvraty) and str(vipiski.zachety) == str(prilozhenia.zachety)):
                             newItem = QTableWidgetItem ("Проверка пройдена")
                             newItem.setBackground(QtGui.QColor(0, 255, 0))
                             newItem.setFont(font)

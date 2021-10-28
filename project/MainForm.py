@@ -104,7 +104,10 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
         self.menu_2 = QtWidgets.QAction(MainWindow)
         self.menu_2.setObjectName("menu_2")
+        self.action = QtWidgets.QAction(MainWindow)
+        self.action.setObjectName("action")
         self.menu.addAction(self.menu_2)
+        self.menu.addAction(self.action)
         self.menubar.addAction(self.menu.menuAction())
 
         self.retranslateUi(MainWindow)
@@ -116,5 +119,6 @@ class Ui_MainWindow(object):
         self.loadVipiski.setText(_translate("MainWindow", "ЗАГРУЗИТЬ ВЫПИСКИ"))
         self.loadPrilozhenya.setText(_translate("MainWindow", "ЗАГРУЗИТЬ ПРИЛОЖЕНИЯ"))
         self.sverka.setText(_translate("MainWindow", "ПРИСТУПИТЬ К СВЕРКЕ"))
-        self.menu.setTitle(_translate("MainWindow", "О программе"))
+        self.menu.setTitle(_translate("MainWindow", "Файл"))
         self.menu_2.setText(_translate("MainWindow", "О программе"))
+        self.action.setText(_translate("MainWindow", "Сброс"))

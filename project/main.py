@@ -26,6 +26,7 @@ class MyWindow(QtWidgets.QMainWindow):
         self.filename_two = ''
         self.aboutForm = None
         self.ui.menu.actions()[0].triggered.connect(self.OpenAbout)
+        self.ui.menu.actions()[1].triggered.connect(self.sbros)
         self.res_vipiski = []
         self.res_prilozhenia = []
         self.ui.tableWidget.horizontalHeader().setVisible(False)
@@ -40,6 +41,17 @@ class MyWindow(QtWidgets.QMainWindow):
         self.proverka_uspeshna = 0
         self.setWindowIcon(QtGui.QIcon(':roskazna.png'))
 
+    def sbros(self):
+        self.ui.tableWidget.clear()
+        self.ui.tableWidget.setRowCount(0)
+        self.ui.tableWidget.setColumnCount(0)
+        self.ui.loadVipiski.setEnabled(True)
+        self.ui.loadPrilozhenya.setEnabled(True)
+        self.ui.sverka.setEnabled(False)
+        self.ui.tableWidget.setVisible(False)
+        self.resize(700, 100)
+        self.res_vipiski = []
+        self.res_prilozhenia = []
 
     def open_file(self):
 
@@ -136,7 +148,7 @@ class MyWindow(QtWidgets.QMainWindow):
             temp_prilozhenia = []
             for prilozhenia in self.res_prilozhenia:
                 if vipiski.licevoy == prilozhenia.licevoy:
-                    temp_prilozhenia.append(vipiski)
+                    temp_prilozhenia.append(prilozhenia)
 
             if(len(temp_prilozhenia) == 1):
                 newItem = QTableWidgetItem (str(vipiski.licevoy))
@@ -166,13 +178,21 @@ class MyWindow(QtWidgets.QMainWindow):
                 self.ui.tableWidget.setItem(schet, 7, newItem)
                                         
                 if(str(vipiski.licevoy) == str(temp_prilozhenia[0].licevoy) and str(vipiski.summa) == str(temp_prilozhenia[0].summa) and str(vipiski.vozvraty) == str(temp_prilozhenia[0].vozvraty) and str(vipiski.zachety) == str(temp_prilozhenia[0].zachety)):
-                    newItem = QTableWidgetItem ("Проверка пройдена")
-                    newItem.setBackground(QtGui.QColor(0, 255, 0))
-                    newItem.setFont(font)
-                    newItem.setTextAlignment(QtCore.Qt.AlignCenter)
-                    self.ui.tableWidget.setItem(schet, 8, QTableWidgetItem(newItem))    
+                    
+                    if(str(vipiski.summa) == 'Отсутствует' or str(temp_prilozhenia[0].summa) == 'Отсутствует' or str(vipiski.vozvraty) == 'Отсутствует' or str(temp_prilozhenia[0].vozvraty) == 'Отсутствует' or str(vipiski.zachety) == 'Отсутствует' or str(temp_prilozhenia[0].zachety) == 'Отсутствует'):
+                        newItem = QTableWidgetItem ("Данные отсутсвуют")
+                        newItem.setBackground(QtGui.QColor(220, 220, 170))
+                        newItem.setFont(font)
+                        newItem.setTextAlignment(QtCore.Qt.AlignCenter)
+                        self.ui.tableWidget.setItem(schet, 8, QTableWidgetItem(newItem)) 
+                    else:
+                        newItem = QTableWidgetItem ("Проверка пройдена")
+                        newItem.setBackground(QtGui.QColor(0, 255, 0))
+                        newItem.setFont(font)
+                        newItem.setTextAlignment(QtCore.Qt.AlignCenter)
+                        self.ui.tableWidget.setItem(schet, 8, QTableWidgetItem(newItem))    
                 else:
-                    newItem = QTableWidgetItem ("Обнаружено не совпадение")
+                    newItem = QTableWidgetItem ("Обнаружено несовпадение")
                     newItem.setBackground(QtGui.QColor(255, 0, 0))
                     newItem.setFont(font)
                     newItem.setTextAlignment(QtCore.Qt.AlignCenter)
@@ -210,11 +230,18 @@ class MyWindow(QtWidgets.QMainWindow):
                         newItem.setFont(font_t)                        
                         self.ui.tableWidget.setItem(schet, 7, newItem)
 
-                        newItem = QTableWidgetItem ("Проверка пройдена")
-                        newItem.setBackground(QtGui.QColor(220, 220, 170))
-                        newItem.setFont(font)
-                        newItem.setTextAlignment(QtCore.Qt.AlignCenter)
-                        self.ui.tableWidget.setItem(schet, 8, QTableWidgetItem(newItem)) 
+                        if(str(vipiski.summa) == 'Отсутствует' or str(prilozhenie.summa) == 'Отсутствует' or str(vipiski.vozvraty) == 'Отсутствует' or str(prilozhenie.vozvraty) == 'Отсутствует' or str(vipiski.zachety) == 'Отсутствует' or str(prilozhenie.zachety) == 'Отсутствует'):
+                            newItem = QTableWidgetItem ("Данные отсутсвуют")
+                            newItem.setBackground(QtGui.QColor(220, 220, 170))
+                            newItem.setFont(font)
+                            newItem.setTextAlignment(QtCore.Qt.AlignCenter)
+                            self.ui.tableWidget.setItem(schet, 8, QTableWidgetItem(newItem)) 
+                        else:
+                            newItem = QTableWidgetItem ("Проверка пройдена")
+                            newItem.setBackground(QtGui.QColor(220, 220, 170))
+                            newItem.setFont(font)
+                            newItem.setTextAlignment(QtCore.Qt.AlignCenter)
+                            self.ui.tableWidget.setItem(schet, 8, QTableWidgetItem(newItem)) 
                         
                 if(self.flag == False):
                     newItem = QTableWidgetItem (str(vipiski.licevoy))
@@ -243,7 +270,7 @@ class MyWindow(QtWidgets.QMainWindow):
                     newItem.setFont(font_t)                        
                     self.ui.tableWidget.setItem(schet, 7, newItem)
                     
-                    newItem = QTableWidgetItem ("Обнаружено не совпадение")
+                    newItem = QTableWidgetItem ("Обнаружено несовпадение")
                     newItem.setBackground(QtGui.QColor(255, 0, 0))
                     newItem.setFont(font)
                     newItem.setTextAlignment(QtCore.Qt.AlignCenter)

@@ -133,8 +133,57 @@ class MyWindow(QtWidgets.QMainWindow):
         
         schet = 1
         for vipiski in self.res_vipiski:
+            temp_prilozhenia = []
             for prilozhenia in self.res_prilozhenia:
                 if vipiski.licevoy == prilozhenia.licevoy:
+                    temp_prilozhenia.append(vipiski)
+
+            if(len(temp_prilozhenia) == 1):
+                newItem = QTableWidgetItem (str(vipiski.licevoy))
+                newItem.setFont(font_t)
+                self.ui.tableWidget.setItem(schet, 0, newItem)
+                newItem = QTableWidgetItem (str(vipiski.summa))
+                newItem.setFont(font_t)
+                self.ui.tableWidget.setItem(schet, 1, newItem)
+                newItem = QTableWidgetItem (str(vipiski.vozvraty))
+                newItem.setFont(font_t)                        
+                self.ui.tableWidget.setItem(schet, 2, newItem)
+                newItem = QTableWidgetItem (str(vipiski.zachety))
+                newItem.setFont(font_t)                        
+                self.ui.tableWidget.setItem(schet, 3, newItem)
+
+                newItem = QTableWidgetItem (str(temp_prilozhenia[0].licevoy))
+                newItem.setFont(font_t)                                 
+                self.ui.tableWidget.setItem(schet, 4, newItem)
+                newItem = QTableWidgetItem (str(temp_prilozhenia[0].summa))
+                newItem.setFont(font_t)                        
+                self.ui.tableWidget.setItem(schet, 5, newItem)
+                newItem = QTableWidgetItem (str(temp_prilozhenia[0].vozvraty))
+                newItem.setFont(font_t)                        
+                self.ui.tableWidget.setItem(schet, 6, newItem)
+                newItem = QTableWidgetItem (str(temp_prilozhenia[0].zachety))
+                newItem.setFont(font_t)                        
+                self.ui.tableWidget.setItem(schet, 7, newItem)
+                                        
+                if(str(vipiski.licevoy) == str(temp_prilozhenia[0].licevoy) and str(vipiski.summa) == str(temp_prilozhenia[0].summa) and str(vipiski.vozvraty) == str(temp_prilozhenia[0].vozvraty) and str(vipiski.zachety) == str(temp_prilozhenia[0].zachety)):
+                    newItem = QTableWidgetItem ("Проверка пройдена")
+                    newItem.setBackground(QtGui.QColor(0, 255, 0))
+                    newItem.setFont(font)
+                    newItem.setTextAlignment(QtCore.Qt.AlignCenter)
+                    self.ui.tableWidget.setItem(schet, 8, QTableWidgetItem(newItem))    
+                else:
+                    newItem = QTableWidgetItem ("Обнаружено не совпадение")
+                    newItem.setBackground(QtGui.QColor(255, 0, 0))
+                    newItem.setFont(font)
+                    newItem.setTextAlignment(QtCore.Qt.AlignCenter)
+                    self.ui.tableWidget.setItem(schet, 8, QTableWidgetItem(newItem))
+                    self.proverka_uspeshna = self.proverka_uspeshna + 1     
+            else:
+                self.flag = False
+                for prilozhenie in temp_prilozhenia:
+                    temp_prilozhenie = prilozhenie
+                    if(str(vipiski.licevoy) == str(prilozhenie.licevoy) and str(vipiski.summa) == str(prilozhenie.summa) and str(vipiski.vozvraty) == str(prilozhenie.vozvraty) and str(vipiski.zachety) == str(prilozhenie.zachety)):
+                        self.flag = True
                         newItem = QTableWidgetItem (str(vipiski.licevoy))
                         newItem.setFont(font_t)
                         self.ui.tableWidget.setItem(schet, 0, newItem)
@@ -148,32 +197,60 @@ class MyWindow(QtWidgets.QMainWindow):
                         newItem.setFont(font_t)                        
                         self.ui.tableWidget.setItem(schet, 3, newItem)
 
-                        newItem = QTableWidgetItem (str(prilozhenia.licevoy))
+                        newItem = QTableWidgetItem (str(prilozhenie.licevoy))
                         newItem.setFont(font_t)                                 
                         self.ui.tableWidget.setItem(schet, 4, newItem)
-                        newItem = QTableWidgetItem (str(prilozhenia.summa))
+                        newItem = QTableWidgetItem (str(prilozhenie.summa))
                         newItem.setFont(font_t)                        
                         self.ui.tableWidget.setItem(schet, 5, newItem)
-                        newItem = QTableWidgetItem (str(prilozhenia.vozvraty))
+                        newItem = QTableWidgetItem (str(prilozhenie.vozvraty))
                         newItem.setFont(font_t)                        
                         self.ui.tableWidget.setItem(schet, 6, newItem)
-                        newItem = QTableWidgetItem (str(prilozhenia.zachety))
+                        newItem = QTableWidgetItem (str(prilozhenie.zachety))
                         newItem.setFont(font_t)                        
                         self.ui.tableWidget.setItem(schet, 7, newItem)
-                                              
-                        if(str(vipiski.licevoy) == str(prilozhenia.licevoy) and str(vipiski.summa) == str(prilozhenia.summa) and str(vipiski.vozvraty) == str(prilozhenia.vozvraty) and str(vipiski.zachety) == str(prilozhenia.zachety)):
-                            newItem = QTableWidgetItem ("Проверка пройдена")
-                            newItem.setBackground(QtGui.QColor(0, 255, 0))
-                            newItem.setFont(font)
-                            newItem.setTextAlignment(QtCore.Qt.AlignCenter)
-                            self.ui.tableWidget.setItem(schet, 8, QTableWidgetItem(newItem))    
-                        else:
-                            newItem = QTableWidgetItem ("Обнаружено не совпадение")
-                            newItem.setBackground(QtGui.QColor(255, 0, 0))
-                            newItem.setFont(font)
-                            newItem.setTextAlignment(QtCore.Qt.AlignCenter)
-                            self.ui.tableWidget.setItem(schet, 8, QTableWidgetItem(newItem))
-                            self.proverka_uspeshna = self.proverka_uspeshna + 1     
+
+                        newItem = QTableWidgetItem ("Требуется ручная проверка")
+                        newItem.setBackground(QtGui.QColor(220, 220, 170))
+                        newItem.setFont(font)
+                        newItem.setTextAlignment(QtCore.Qt.AlignCenter)
+                        self.ui.tableWidget.setItem(schet, 8, QTableWidgetItem(newItem)) 
+                        
+                if(self.flag == False):
+                    newItem = QTableWidgetItem (str(vipiski.licevoy))
+                    newItem.setFont(font_t)
+                    self.ui.tableWidget.setItem(schet, 0, newItem)
+                    newItem = QTableWidgetItem (str(vipiski.summa))
+                    newItem.setFont(font_t)
+                    self.ui.tableWidget.setItem(schet, 1, newItem)
+                    newItem = QTableWidgetItem (str(vipiski.vozvraty))
+                    newItem.setFont(font_t)                        
+                    self.ui.tableWidget.setItem(schet, 2, newItem)
+                    newItem = QTableWidgetItem (str(vipiski.zachety))
+                    newItem.setFont(font_t)                        
+                    self.ui.tableWidget.setItem(schet, 3, newItem)
+
+                    newItem = QTableWidgetItem (str(temp_prilozhenie.licevoy))
+                    newItem.setFont(font_t)                                 
+                    self.ui.tableWidget.setItem(schet, 4, newItem)
+                    newItem = QTableWidgetItem (str(temp_prilozhenie.summa))
+                    newItem.setFont(font_t)                        
+                    self.ui.tableWidget.setItem(schet, 5, newItem)
+                    newItem = QTableWidgetItem (str(temp_prilozhenie.vozvraty))
+                    newItem.setFont(font_t)                        
+                    self.ui.tableWidget.setItem(schet, 6, newItem)
+                    newItem = QTableWidgetItem (str(temp_prilozhenie.zachety))
+                    newItem.setFont(font_t)                        
+                    self.ui.tableWidget.setItem(schet, 7, newItem)
+                    
+                    newItem = QTableWidgetItem ("Обнаружено не совпадение")
+                    newItem.setBackground(QtGui.QColor(255, 0, 0))
+                    newItem.setFont(font)
+                    newItem.setTextAlignment(QtCore.Qt.AlignCenter)
+                    self.ui.tableWidget.setItem(schet, 8, QTableWidgetItem(newItem))
+                    self.proverka_uspeshna = self.proverka_uspeshna + 1   
+
+
             schet = schet + 1
         
         if(self.proverka_uspeshna == 0):

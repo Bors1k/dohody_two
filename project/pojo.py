@@ -1,5 +1,5 @@
 class LS():
-    def __init__(self, licevoy, summa = 0, rowNumber = 0, vozvraty = 0, zachety = 0):
+    def __init__(self, licevoy, summa = "Отсутствует", rowNumber = "Отсутствует", vozvraty = "Отсутствует", zachety = "Отсутствует"):
        self.licevoy = licevoy
        self.summa = summa
        self.rowNumber = rowNumber

@@ -210,7 +210,7 @@ class MyWindow(QtWidgets.QMainWindow):
                         newItem.setFont(font_t)                        
                         self.ui.tableWidget.setItem(schet, 7, newItem)
 
-                        newItem = QTableWidgetItem ("Требуется ручная проверка")
+                        newItem = QTableWidgetItem ("Проверка пройдена")
                         newItem.setBackground(QtGui.QColor(220, 220, 170))
                         newItem.setFont(font)
                         newItem.setTextAlignment(QtCore.Qt.AlignCenter)
@@ -284,7 +284,7 @@ class MyWindow(QtWidgets.QMainWindow):
 
 app = QtWidgets.QApplication([])
 application = MyWindow()
-application.setWindowTitle("Сверщик ведомостей")
+application.setWindowTitle("Сверщик выписок")
 application.show()
 
 sys.exit(app.exec())

@@ -8,7 +8,8 @@ import re
 
 
 class Read(QThread):
-    appendText = QtCore.pyqtSignal(list)
+    appendText = QtCore.pyqtSignal(list,bool)
+    
     def __init__(self, my_window, parent=None):
         super(Read, self).__init__()
         self.my_window = my_window
@@ -18,6 +19,8 @@ class Read(QThread):
         self.dict_vozvraty = {}
         self.dict_zachety = {}
         self.dict_LS = []
+        self.check_one = self.my_window.check_one
+
 
     def write_dicts(self, wb, sheet_one, this_sheet, lic, itogo, summ, vozvr, zach, check_A_operacii, check_A_neispoln):
         i = 0
@@ -44,22 +47,7 @@ class Read(QThread):
         
         print(len(self.dict_summ))
 
-        
-    def run(self):
-        if self.my_window.check_one:
-            self.filename = self.my_window.filename_one[0]
-        else:
-            self.filename = self.my_window.filename_two[0]
-
-        wb = openpyxl.load_workbook(self.filename)
-        sheet_one = wb.get_sheet_names()[0]
-        this_sheet = wb[sheet_one]
-
-        if self.my_window.check_one:
-            self.write_dicts(wb, sheet_one, this_sheet,'AH', 'AC', 'AG', 'AL', 'AQ', '2. Операции с бюджетными средствами', '3. Неисполненные поручения администратора доходов')
-        else:
-            self.write_dicts(wb, sheet_one, this_sheet,'AC', 'F', 'K', 'Q', 'W', '1. Операции со средствами', '2. Неисполненные поручения администратора доходов')
-
+    def motor(self):
         firstLs = None
         SecondLs = None
         i = 1
@@ -93,5 +81,22 @@ class Read(QThread):
             i = i + 1
 
         print("count ls - ",len(self.dict_LS))
+        
+    def run(self):
+        if self.check_one:
+            self.filename = self.my_window.filename_one[0]
+        else:
+            self.filename = self.my_window.filename_two[0]
 
-        self.appendText.emit(self.dict_LS)
+        wb = openpyxl.load_workbook(self.filename)
+        sheet_one = wb.get_sheet_names()[0]
+        this_sheet = wb[sheet_one]
+
+        if self.check_one:
+            self.write_dicts(wb, sheet_one, this_sheet,'AH', 'AC', 'AG', 'AL', 'AQ', '2. Операции с бюджетными средствами', '3. Неисполненные поручения администратора доходов')
+            self.motor()
+            self.appendText.emit(self.dict_LS,self.check_one)
+        else:
+            self.write_dicts(wb, sheet_one, this_sheet,'AC', 'F', 'K', 'Q', 'W', '1. Операции со средствами', '2. Неисполненные поручения администратора доходов')
+            self.motor()
+            self.appendText.emit(self.dict_LS,self.check_one)

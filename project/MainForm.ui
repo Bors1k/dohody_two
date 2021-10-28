@@ -18,7 +18,8 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="styleSheet">
-    <string notr="true">background-color: rgba(85, 85, 127, 50);</string>
+    <string notr="true">QWidget#widget{background-color: rgba(85, 85, 127, 50);};
+</string>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <property name="spacing">
@@ -40,7 +41,7 @@
      <widget class="QWidget" name="widget" native="true">
       <property name="styleSheet">
        <string notr="true">QWidget#widget{
-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 170, 255, 246), stop:1 rgba(85, 170, 127, 255));}</string>
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 170, 255, 246), stop:1 rgba(85, 170, 127, 255));};</string>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
@@ -132,12 +133,9 @@ border-radius: 5px;
         </layout>
        </item>
        <item>
-        <widget class="QTextEdit" name="logger">
+        <widget class="QTableWidget" name="tableWidget">
          <property name="styleSheet">
-          <string notr="true">background-color: rgba(85, 85, 127, 150);
-font: 75 12pt &quot;Times New Roman&quot;;
-color: rgb(170, 255, 255);
-border-radius: 10px;</string>
+          <string notr="true">border-radius: 15px</string>
          </property>
         </widget>
        </item>

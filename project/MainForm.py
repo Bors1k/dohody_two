@@ -106,8 +106,11 @@ class Ui_MainWindow(object):
         self.menu_2.setObjectName("menu_2")
         self.action = QtWidgets.QAction(MainWindow)
         self.action.setObjectName("action")
+        self.action_Excel = QtWidgets.QAction(MainWindow)
+        self.action_Excel.setObjectName("action_Excel")
         self.menu.addAction(self.menu_2)
         self.menu.addAction(self.action)
+        self.menu.addAction(self.action_Excel)
         self.menubar.addAction(self.menu.menuAction())
 
         self.retranslateUi(MainWindow)
@@ -122,3 +125,4 @@ class Ui_MainWindow(object):
         self.menu.setTitle(_translate("MainWindow", "Файл"))
         self.menu_2.setText(_translate("MainWindow", "О программе"))
         self.action.setText(_translate("MainWindow", "Сброс"))
+        self.action_Excel.setText(_translate("MainWindow", "Выгрузить в Excel"))

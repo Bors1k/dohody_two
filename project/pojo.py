@@ -5,6 +5,7 @@ class LS():
        self.rowNumber = rowNumber
        self.vozvraty = vozvraty
        self.zachety = zachety
+       self.isUsed = False
     
     def SetSumma(self,summa, vozvraty, zachety):
         self.summa = summa

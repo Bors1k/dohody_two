@@ -72,7 +72,7 @@ class MyWindow(QtWidgets.QMainWindow):
         self.sheet.column_dimensions['F'].width = 20
         self.sheet.column_dimensions['G'].width = 20
         self.sheet.column_dimensions['H'].width = 20
-        self.sheet.column_dimensions['I'].width = 20
+        self.sheet.column_dimensions['I'].width = 30
 
         self.sheet.merge_cells('A1:D1')
         self.sheet.merge_cells('E1:H1')
@@ -188,6 +188,7 @@ class MyWindow(QtWidgets.QMainWindow):
             for prilozhenia in self.res_prilozhenia:
                 if vipiski.licevoy == prilozhenia.licevoy:
                     temp_prilozhenia.append(prilozhenia)
+                    prilozhenia.isUsed = True
 
             if(len(temp_prilozhenia) == 1):
                 newItem = QTableWidgetItem (str(vipiski.licevoy))
@@ -354,6 +355,44 @@ class MyWindow(QtWidgets.QMainWindow):
 
             schet = schet + 1
         
+        for prilozh in self.res_prilozhenia:
+            if(prilozh.isUsed != True):
+                print(schet)
+                _newItem = QTableWidgetItem ("Отсутствует")
+                _newItem.setFont(font_t)
+                self.ui.tableWidget.setItem(schet, 0, _newItem)
+                _newItem = QTableWidgetItem ("Отсутствует")
+                _newItem.setFont(font_t)
+                self.ui.tableWidget.setItem(schet, 1, _newItem)
+                _newItem = QTableWidgetItem ("Отсутствует")
+                _newItem.setFont(font_t)                        
+                self.ui.tableWidget.setItem(schet, 2, _newItem)
+                _newItem = QTableWidgetItem ("Отсутствует")
+                _newItem.setFont(font_t)                        
+                self.ui.tableWidget.setItem(schet, 3, _newItem)
+                
+                _newItem = QTableWidgetItem (str(prilozh.licevoy))
+                _newItem.setFont(font_t)                                 
+                self.ui.tableWidget.setItem(schet, 4, _newItem)
+                _newItem = QTableWidgetItem (str(prilozh.summa))
+                _newItem.setFont(font_t)                        
+                self.ui.tableWidget.setItem(schet, 5, _newItem)
+                _newItem = QTableWidgetItem (str(prilozh.vozvraty))
+                _newItem.setFont(font_t)                        
+                self.ui.tableWidget.setItem(schet, 6, _newItem)
+                _newItem = QTableWidgetItem (str(prilozh.zachety))
+                _newItem.setFont(font_t)                        
+                self.ui.tableWidget.setItem(schet, 7, _newItem)
+
+                _newItem = QTableWidgetItem ("Отсутсвует выписка")
+                _newItem.setBackground(QtGui.QColor(255, 0, 0))
+                _newItem.setFont(font)
+                _newItem.setTextAlignment(QtCore.Qt.AlignCenter)
+                self.ui.tableWidget.setItem(schet, 8, _newItem)
+                self.proverka_uspeshna = self.proverka_uspeshna + 1 
+
+                schet = schet + 1
+
         if(self.proverka_uspeshna == 0):
             messagebox = QMessageBox(
                 parent=self, text='ВСЕ ДАННЫЕ СОВПАДАЮТ!!!')
@@ -376,12 +415,6 @@ class MyWindow(QtWidgets.QMainWindow):
         qtRectangle.moveCenter(centerPoint)
         self.move(qtRectangle.topLeft())
         self.ui.sverka.setEnabled(False)
-
-
-
-                    # self.ui.logger.append('Выписка ' + str(vipiski.licevoy) + "   " + str(vipiski.summa) + "   " + str(vipiski.vozvraty) + "   " + str(vipiski.zachety))
-                    # self.ui.logger.append('Приложение ' + str(prilozhenia.licevoy) + "   " + str(prilozhenia.summa) + "   " + str(prilozhenia.vozvraty) + "   " + str(prilozhenia.zachety))
-
 
 app = QtWidgets.QApplication([])
 application = MyWindow()

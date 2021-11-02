@@ -1,3 +1,4 @@
+import os
 from PyQt5 import QtCore
 import openpyxl
 from PyQt5.QtCore import QThread, pyqtSignal
@@ -85,9 +86,10 @@ class Read(QThread):
     def run(self):
         if self.check_one:
             self.filename = self.my_window.filename_one[0]
+            self.filename = self.filename.replace('.xls','.xlsx')
         else:
             self.filename = self.my_window.filename_two[0]
-
+            self.filename = self.filename.replace('.xls','.xlsx')
         wb = openpyxl.load_workbook(self.filename)
         sheet_one = wb.get_sheet_names()[0]
         this_sheet = wb[sheet_one]
@@ -95,8 +97,10 @@ class Read(QThread):
         if self.check_one:
             self.write_dicts(wb, sheet_one, this_sheet,'AH', 'AC', 'AG', 'AL', 'AQ', '2. Операции с бюджетными средствами', '3. Неисполненные поручения администратора доходов')
             self.motor()
+            os.remove(self.filename)
             self.appendText.emit(self.dict_LS,self.check_one)
         else:
             self.write_dicts(wb, sheet_one, this_sheet,'AC', 'F', 'K', 'Q', 'W', '1. Операции со средствами', '2. Неисполненные поручения администратора доходов')
             self.motor()
+            os.remove(self.filename)
             self.appendText.emit(self.dict_LS,self.check_one)

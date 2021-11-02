@@ -162,10 +162,11 @@ class MyWindow(QtWidgets.QMainWindow):
     def run_sverka(self):
         self.wb = Workbook()
         self.ui.tableWidget.setVisible(True)
-        if len(self.res_vipiski)>=len(self.res_prilozhenia):
-            self.ui.tableWidget.setRowCount(len(self.res_vipiski)+1)
-        else:
-            self.ui.tableWidget.setRowCount(len(self.res_prilozhenia)+1)
+        
+            # Максимаьное число строк = выписки + приложения
+            # Есть шанс что все они будут не подходить друг другу
+        self.ui.tableWidget.setRowCount(len(self.res_vipiski)+len(self.res_prilozhenia))
+        
         self.ui.tableWidget.setColumnCount(9)
         font = QFont()
         font.setBold(True)

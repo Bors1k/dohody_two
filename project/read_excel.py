@@ -23,6 +23,7 @@ class Read(QThread):
         self.dict_zachety = {}
         self.dict_LS = []
         self.check_one = self.my_window.check_one
+        self.delete_file = True
 
 
     def write_dicts(self, wb, sheet_one, this_sheet, lic, itogo, summ, vozvr, zach, check_A_operacii, check_A_neispoln):
@@ -89,14 +90,14 @@ class Read(QThread):
         if self.check_one:
             self.filename = self.my_window.filename_one[0]
             if self.filename.__contains__('.xlsx'):
-                pass
+                self.delete_file = False
             else:
                 pyexcel.save_book_as(file_name=self.filename,dest_file_name=self.filename.replace('.xls','.xlsx'))
                 self.filename = self.filename.replace('.xls','.xlsx')
         else:
             self.filename = self.my_window.filename_two[0]
             if self.filename.__contains__('.xlsx'):
-                pass
+                self.delete_file = False
             else:
                 pyexcel.save_book_as(file_name=self.filename,dest_file_name=self.filename.replace('.xls','.xlsx'))
                 self.filename = self.filename.replace('.xls','.xlsx')
@@ -107,10 +108,12 @@ class Read(QThread):
         if self.check_one:
             self.write_dicts(wb, sheet_one, this_sheet,'AH', 'AC', 'AG', 'AL', 'AQ', '2. Операции с бюджетными средствами', '3. Неисполненные поручения администратора доходов')
             self.motor()
-            os.remove(self.filename)
+            if self.delete_file:
+                os.remove(self.filename)
             self.appendText.emit(self.dict_LS,self.check_one)
         else:
             self.write_dicts(wb, sheet_one, this_sheet,'AC', 'F', 'K', 'Q', 'W', '1. Операции со средствами', '2. Неисполненные поручения администратора доходов')
             self.motor()
-            os.remove(self.filename)
+            if self.delete_file:
+                os.remove(self.filename)
             self.appendText.emit(self.dict_LS,self.check_one)

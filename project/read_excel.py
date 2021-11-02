@@ -92,15 +92,15 @@ class Read(QThread):
             if self.filename.__contains__('.xlsx'):
                 self.delete_file = False
             else:
-                pyexcel.save_book_as(file_name=self.filename,dest_file_name=self.filename.replace('.xls','.xlsx'))
-                self.filename = self.filename.replace('.xls','.xlsx')
+                pyexcel.save_book_as(file_name=self.filename,dest_file_name=self.filename.replace('.xls','_temp.xlsx'))
+                self.filename = self.filename.replace('.xls','_temp.xlsx')
         else:
             self.filename = self.my_window.filename_two[0]
             if self.filename.__contains__('.xlsx'):
                 self.delete_file = False
             else:
-                pyexcel.save_book_as(file_name=self.filename,dest_file_name=self.filename.replace('.xls','.xlsx'))
-                self.filename = self.filename.replace('.xls','.xlsx')
+                pyexcel.save_book_as(file_name=self.filename,dest_file_name=self.filename.replace('.xls','_temp.xlsx'))
+                self.filename = self.filename.replace('.xls','_temp.xlsx')
         wb = openpyxl.load_workbook(self.filename)
         sheet_one = wb.get_sheet_names()[0]
         this_sheet = wb[sheet_one]

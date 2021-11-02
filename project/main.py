@@ -98,10 +98,7 @@ class MyWindow(QtWidgets.QMainWindow):
             None, 'Открыть', os.path.join(os.path.join(
                 os.environ['USERPROFILE']), 'Desktop'),
             'Excel Files(*.xls);;Excel Files(*.xlsx)')
-        if self.filename[0].__contains__('.xlsx'):
-            pass
-        else:
-            pyexcel.save_book_as(file_name=self.filename[0],dest_file_name=self.filename[0].replace('.xls','.xlsx'))
+
         sender = self.sender()
         if str(self.filename) in "('', '')":
             self.ui.statusbar.showMessage('Файл не выбран')

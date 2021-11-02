@@ -4,6 +4,8 @@ import openpyxl
 from PyQt5.QtCore import QThread, pyqtSignal
 from openpyxl import Workbook
 import re
+
+import pyexcel
 from pojo import LS
 import re
 
@@ -86,10 +88,18 @@ class Read(QThread):
     def run(self):
         if self.check_one:
             self.filename = self.my_window.filename_one[0]
-            self.filename = self.filename.replace('.xls','.xlsx')
+            if self.filename.__contains__('.xlsx'):
+                pass
+            else:
+                pyexcel.save_book_as(file_name=self.filename,dest_file_name=self.filename.replace('.xls','.xlsx'))
+                self.filename = self.filename.replace('.xls','.xlsx')
         else:
             self.filename = self.my_window.filename_two[0]
-            self.filename = self.filename.replace('.xls','.xlsx')
+            if self.filename.__contains__('.xlsx'):
+                pass
+            else:
+                pyexcel.save_book_as(file_name=self.filename,dest_file_name=self.filename.replace('.xls','.xlsx'))
+                self.filename = self.filename.replace('.xls','.xlsx')
         wb = openpyxl.load_workbook(self.filename)
         sheet_one = wb.get_sheet_names()[0]
         this_sheet = wb[sheet_one]

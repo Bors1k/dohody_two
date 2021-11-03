@@ -398,7 +398,7 @@ class MyWindow(QtWidgets.QMainWindow):
                 self.proverka_uspeshna = self.proverka_uspeshna + 1 
 
                 schet = schet + 1
-
+                
         if(self.proverka_uspeshna == 0):
             messagebox = QMessageBox(
                 parent=self, text='ВСЕ ДАННЫЕ СОВПАДАЮТ!!!')
@@ -421,6 +421,7 @@ class MyWindow(QtWidgets.QMainWindow):
         qtRectangle.moveCenter(centerPoint)
         self.move(qtRectangle.topLeft())
         self.ui.sverka.setEnabled(False)
+        
 
 app = QtWidgets.QApplication([])
 application = MyWindow()

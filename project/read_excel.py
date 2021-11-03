@@ -6,6 +6,9 @@ from openpyxl import Workbook
 import re
 
 import pyexcel
+import pyexcel_xls
+import pyexcel_xlsx
+import pyexcel_cli
 from pojo import LS
 import re
 
